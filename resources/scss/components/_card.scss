@@ -1,0 +1,52 @@
+@mixin styles($parent) {
+    #{$parent}__card {
+        @apply rounded-md shadow-md shadow-black/25 w-full mx-auto flex flex-col justify-between bg-white relative;
+
+        &__list {
+            @apply grid grid-cols-1 gap-6;
+            @apply sm:grid-cols-2;
+        }
+
+        &__banner {
+            @apply rounded-t-md bg-blue-600 w-full h-[10rem] overflow-hidden select-none;
+        }
+
+        &__title {
+            @apply text-lg font-semibold text-gray-800 overflow-ellipsis overflow-hidden whitespace-nowrap;
+        }
+
+        &__subtitle {
+            @apply text-sm text-gray-800 truncate block;
+        }
+
+        &__body_container {
+            @apply space-y-2 flex-1 flex flex-col justify-end text-gray-800;
+        }
+
+        &__body_list {
+            @apply flex justify-center items-center mr-4;
+        }
+
+        &__body_item {
+            @apply -mr-3;
+        }
+
+        &__footer {
+            @apply w-full shadow-lg px-5 py-2 rounded flex items-center justify-between border-t text-gray-700;
+
+            &__list {
+                @apply flex justify-center items-center space-x-1;
+            }
+
+            &__item {
+                @apply rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-gray-500 border bg-gray-200;
+                @apply hover:bg-blue-400 hover:text-white hover:border-blue-400;
+            }
+
+            &__button {
+                @apply bg-blue-500 py-2 px-4 rounded uppercase font-bold text-white text-sm select-none;
+                @apply hover:bg-opacity-75;
+            }
+        }
+    }
+}

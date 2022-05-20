@@ -1,0 +1,99 @@
+.show-layout {
+    &__container {
+        @apply mx-3;
+        @apply md:mx-0;
+    }
+
+    &__card {
+        @apply w-full bg-white shadow mb-6;
+    }
+
+    &__card_container {
+        @apply relative;
+    }
+
+    &__banner {
+        @apply rounded-t h-[20rem] w-full overflow-hidden select-none brightness-[.25];
+        @apply md:brightness-[.50];
+    }
+
+    &__information {
+        @apply flex gap-2 flex-col items-center justify-center absolute top-0 left-0 w-full h-full;
+        @apply md:flex-row md:justify-start md:items-end;
+    }
+
+    &__avatar {
+        @apply rounded-full overflow-hidden w-[8rem] h-[8rem] min-w-[8rem] min-h-[8rem] select-none border-4 z-10;
+        @apply md:ml-2 md:translate-y-[4rem];
+    }
+
+    &__description {
+        @apply z-10 space-y-2 w-5/6;
+        @apply md:flex-1 md:mr-2 md:mb-2 overflow-auto;
+    }
+
+    &__title {
+        @apply flex items-center justify-center;
+        @apply md:justify-start md:max-w-[80%];
+    }
+
+    &__title_name {
+        @apply text-xl text-white font-bold uppercase mr-1 truncate;
+    }
+
+    &__wrapper {
+        @apply flex items-center flex-col;
+        @apply md:flex-row;
+    }
+
+    &__wrapper_info {
+        @apply text-sm text-white uppercase w-full text-center;
+        @apply md:flex-1 md:text-left md:min-w-[60%];
+    }
+
+    &__activity {
+        @apply md:flex md:flex-row md:items-center md:justify-between md:py-4 md:ml-36 md:mr-2;
+    }
+
+    &__left_mobile {
+        @apply flex items-center justify-between flex-col space-y-3;
+        @apply md:hidden;
+    }
+
+    &__left_container {
+        @apply hidden;
+        @apply md:block;
+    }
+
+    &__left_items {
+        @apply flex items-center justify-start gap-4;
+    }
+
+    &__right {
+        @apply flex items-center justify-center gap-6 py-4;
+        @apply md:py-0;
+    }
+
+    &__nav {
+        @apply grid grid-flow-col divide-x divide-gray-200 overflow-auto mt-5 text-gray-500 font-bold bg-white rounded-lg shadow border;
+    }
+
+    &__nav_item {
+        @apply grid grid-rows-2 text-center items-center w-32 relative py-2;
+        @apply md:w-full;
+    }
+
+    &__nav_item::after {
+        @apply absolute bottom-0 left-0 w-0 h-1 bg-gray-300 transition-all duration-150;
+        content: '';
+    }
+
+    &__nav_item:hover::after {
+        @apply w-full;
+    } 
+
+    &__nav_item--active::after,
+    &__nav_item--active:hover::after {
+        @apply w-full bg-blue-500;
+    }
+}

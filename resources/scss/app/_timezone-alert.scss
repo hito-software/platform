@@ -1,0 +1,8 @@
+.timezone-alert {
+    @apply fixed top-10 right-10 p-5 shadow rounded bg-white z-50 space-y-4 transition-all duration-300 transform w-[25rem]
+    opacity-0 invisible translate-y-10;
+
+    &--active {
+        @apply opacity-100 visible translate-y-0;
+    }
+}

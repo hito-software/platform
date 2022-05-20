@@ -1,0 +1,39 @@
+.header-menu {
+    &--mobile {
+        @apply top-0 left-0 w-full bg-white shadow-lg z-20 px-4;
+        @apply xl:hidden;
+    }
+
+    &--desktop {
+        @apply hidden;
+        @apply xl:w-full xl:h-[80px] xl:shadow-lg xl:z-20 xl:bg-white xl:flex xl:items-center xl:justify-between xl:top-0 xl:left-0;
+    }
+
+    &__topbar {
+        @apply flex items-center justify-between py-2 transition-all duration-150 overflow-hidden;
+    }
+
+    &__icon {
+        @apply relative w-[30px] h-[30px] flex items-center justify-center;
+        @apply hover:text-blue-400;
+        @apply sm:w-[50px] sm:h-[50px];
+
+        &--active {
+            @apply text-blue-500;
+        }
+    }
+
+    &__icon-size {
+        @apply text-2xl;
+    }
+
+    &__icon-notification {
+        @apply absolute bottom-2 right-3 w-[10px] h-[10px] bg-blue-500 rounded-full border pointer-events-none;
+    }
+}
+
+html[data-scroll-direction="down"] {
+    .header-menu__topbar {
+        @apply h-0 py-0;
+    }
+}

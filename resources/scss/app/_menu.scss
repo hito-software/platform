@@ -1,0 +1,28 @@
+.menu {
+    @apply space-y-4 mt-4;
+
+    &__item {
+        @apply relative;
+    }
+
+    &__button {
+        @apply w-full flex items-center space-x-2 py-2 px-4 rounded uppercase tracking-wide font-semibold text-sm;
+    }
+
+    &__title {
+        @apply w-full flex items-center space-x-2 py-2 px-4 rounded uppercase tracking-wide font-bold text-sm;
+    }
+
+    &__link {
+        @apply whitespace-nowrap flex items-center space-x-2 py-2 px-4;
+        @apply hover:bg-gray-100 hover:shadow;
+    }
+
+    &__item:hover &__button {
+        @apply hover:bg-gray-100;
+    }
+
+    &__link--active {
+        @apply bg-gray-200 hover:bg-gray-200;
+    }
+}

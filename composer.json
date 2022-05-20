@@ -1,0 +1,54 @@
+{
+    "name": "hito-software/platform",
+    "description": ":package_description",
+    "keywords": [],
+    "homepage": "https://github.com/hito-software/platform",
+    "license": "MIT",
+    "require": {
+        "ext-dom": "*",
+        "ext-exif": "*",
+        "ext-fileinfo": "*",
+        "ext-zip": "*",
+        "genealabs/laravel-model-caching": "0.12.4",
+        "hito-software/admin": "dev-master",
+        "hito-software/auth": "dev-master",
+        "hito-software/core": "dev-master",
+        "hito-software/module": "dev-master",
+        "php": "^8.1",
+        "spatie/laravel-activitylog": "^4.5.2",
+        "spatie/laravel-package-tools": "^1.9.2",
+        "spatie/laravel-permission": "^5.5.2",
+        "spatie/laravel-sluggable": "^3.4.0",
+        "spatie/laravel-translatable": "^6.0.0",
+        "spatie/once": "^3.1",
+        "tonysm/turbo-laravel": "1.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hito\\Platform\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hito\\Platform\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "hito-software/composer-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": "Hito\\Platform\\PlatformServiceProvider"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,16 @@
+.filter_bar {
+    @apply w-full py-6 shadow-lg flex items-center px-8 my-6 bg-white rounded;
+
+    &__count {
+        @apply text-white text-sm bg-red-500 font-bold p-1 rounded;
+    }
+
+    &__title {
+        @apply text-gray-600 font-bold space-x-1 text-sm uppercase tracking-wide;
+    }
+
+    &__filter {
+        @apply rounded text-black cursor-pointer w-[2rem] h-[2rem] flex items-center justify-center;
+        @apply hover:bg-gray-200;
+    }
+}

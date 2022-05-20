@@ -1,0 +1,26 @@
+.sidenav {
+    @apply z-50 fixed top-0 left-0 h-screen w-screen overflow-hidden invisible transition-colors duration-200;
+
+    &__wrapper {
+        @apply z-10 absolute top-0 left-0 h-full min-w-[125px] max-w-[250px] w-full shadow-lg border-r bg-white
+        overflow-auto block transition-all duration-200 -translate-x-full;
+    }
+
+    &--active {
+        @apply visible bg-black/25;
+    }
+
+    &--active &__wrapper {
+        @apply translate-x-0;
+    }
+}
+
+@screen xl {
+    .sidenav {
+        @apply z-10 min-w-[125px] max-w-[250px] visible bg-none shadow-lg;
+
+        &__wrapper {
+            @apply pt-[80px] translate-x-0;
+        }
+    }
+}

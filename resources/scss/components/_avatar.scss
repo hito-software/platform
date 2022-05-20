@@ -1,0 +1,21 @@
+@mixin styles($parent) {
+    #{$parent}__avatar {
+    @apply rounded-full overflow-hidden mx-auto flex justify-center items-center bg-blue-600 select-none;
+
+    &--border-sm {
+        @apply border border-white;
+    }
+
+    &--border-md {
+        @apply border-2 border-white;
+    }
+
+    &--border-lg {
+        @apply border-4 border-white;
+    }
+
+    &--text {
+        @apply text-white font-bold;
+    }
+}
+}

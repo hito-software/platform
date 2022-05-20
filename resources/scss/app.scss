@@ -1,0 +1,69 @@
+@import 'app/header-menu';
+@import 'app/menu';
+@import 'app/card';
+@import 'app/sidenav';
+@import 'app/chatnav';
+@import 'app/timezone-alert';
+@import 'app/filter-bar';
+@import 'app/show-layout';
+@import '~overlayscrollbars/css/OverlayScrollbars.min.css';
+@import '~choices.js/public/assets/styles/choices.min.css';
+/*@import '~tui-calendar/dist/tui-calendar.min.css';
+@import '~tui-date-picker/dist/tui-date-picker.min.css';*/
+@import '~flatpickr/dist/flatpickr.min.css';
+
+.app {
+    &__footer {
+        @apply text-sm flex flex-col items-center;
+    }
+}
+
+.account_list {
+    @apply grid;
+    @apply md:grid-cols-1 space-y-2 mt-2;
+
+    &__item {
+        @apply w-full flex justify-start items-center border-b pb-2;
+    }
+
+    &__item:last-child {
+        @apply border-b-0;
+    }
+
+    &__link {
+        @apply w-full flex justify-start items-center gap-4 py-1 py-2 px-4 rounded transition duration-150;
+        @apply hover:bg-blue-500 hover:text-white;
+    }
+
+    &__title {
+        @apply flex-1 text-lg leading-10 tracking-tight font-semibold;
+    }
+
+    &__arrow {
+        @apply text-gray-400 text-xs transition duration-150;
+    }
+
+    &__link:hover &__arrow {
+        @apply text-white -translate-x-2;
+    }
+
+    &__icon {
+        @apply flex justify-center items-center bg-blue-500 rounded-full h-10 w-10 text-white text-xl transition
+        duration-300;
+    }
+
+    &__link:hover &__icon {
+        @apply transform rotate-[360deg];
+    }
+}
+
+.status_list {
+    &__user {
+        @apply block truncate;
+        max-width: 35ch;
+    }
+}
+
+.ck.ck-editor__main {
+    word-break: break-all;
+}

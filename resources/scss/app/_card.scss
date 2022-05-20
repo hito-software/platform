@@ -1,0 +1,27 @@
+.card {
+    @apply relative rounded shadow-sm bg-white overflow-hidden;
+
+    &__header {
+        @apply flex items-center justify-between w-full py-4 px-6 font-bold text-lg border-b;
+    }
+
+    &__title {
+        @apply text-lg;
+    }
+
+    &__subtitle {
+        @apply text-sm font-normal text-gray-600;
+    }
+
+    &__description {
+        @apply text-sm font-normal text-gray-600;
+    }
+
+    &__body {
+        @apply py-4 px-6;
+    }
+
+    &__footer {
+        @apply py-4 px-6;
+    }
+}

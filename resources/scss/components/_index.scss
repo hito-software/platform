@@ -1,0 +1,15 @@
+@use 'alert';
+@use 'avatar';
+@use 'card';
+@use 'form-group';
+@use 'form-input';
+@use 'form-label';
+
+$rootSelector: '.hito-component';
+
+@include alert.styles($rootSelector);
+@include avatar.styles($rootSelector);
+@include card.styles($rootSelector);
+@include form-group.styles($rootSelector);
+@include form-input.styles($rootSelector);
+@include form-label.styles($rootSelector);

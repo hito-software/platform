@@ -1,0 +1,21 @@
+@mixin styles($parent) {
+    #{$parent}__alert {
+        @apply bg-gray-500 text-white p-4 rounded font-bold space-x-2 flex;
+
+        &--danger {
+            @apply bg-red-500;
+        }
+
+        &--warn {
+            @apply bg-yellow-500;
+        }
+
+        &--success {
+            @apply bg-green-500;
+        }
+
+        &__icon {
+            @apply w-5 flex items-center justify-center;
+        }
+    }
+}
