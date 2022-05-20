@@ -2,13 +2,13 @@
 
 namespace Hito\Platform;
 
+use Hito\Core\BaseServiceProvider;
 use Hito\Core\Database\Enums\SeederType;
 use Hito\Core\Database\Facades\DatabaseSeeder;
 use Hito\Platform\Providers\MenuServiceProvider;
 use Hito\Platform\Providers\TranslationServiceProvider;
 use Hito\Platform\Providers\ViewServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
 
 use Hito\Platform\Providers\AppServiceProvider;
 use Hito\Platform\Providers\AuthServiceProvider;
@@ -16,7 +16,7 @@ use Hito\Platform\Providers\BroadcastServiceProvider;
 use Hito\Platform\Providers\EventServiceProvider;
 use Hito\Platform\Providers\RouteServiceProvider;
 
-class PlatformServiceProvider extends ServiceProvider
+class PlatformServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
@@ -40,13 +40,7 @@ class PlatformServiceProvider extends ServiceProvider
 
         Blade::componentNamespace('Hito\\Platform\\View\\Components', 'hito');
 
-        $files = app('files');
-        $publicPath = public_path(config('app.asset_path') . '/' . config('app.asset_directory_main'));
-        $destinationPath = "{$publicPath}/platform";
-        if (!$files->isDirectory($destinationPath)) {
-            $files->ensureDirectoryExists($publicPath);
-            $files->link(__DIR__.'/../public', $destinationPath);
-        }
+        $this->registerAssetDirectory('public', 'platform');
     }
 
     protected function loadConfig()
