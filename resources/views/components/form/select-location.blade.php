@@ -1,5 +1,5 @@
 <div class="space-y-2 w-full">
-    <x-hito::Form.Select :title="$title" :note="$note" :items="$items" :name="$name" :value="$value"
+    <x-hito::Form.Select :title="$title" :note="$note" :items="$items" :name="$name" :value="$value" :multiple="$multiple"
                    :placeholder="$placeholder" :required="$required" :clear="false"></x-hito::Form.Select>
 
     @if (!count($items) && $attributes->get('alerts') !== false)
