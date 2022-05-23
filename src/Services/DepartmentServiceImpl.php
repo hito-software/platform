@@ -13,9 +13,9 @@ class DepartmentServiceImpl implements DepartmentService
     {
     }
 
-    public function create(array $data): Department
+    public function create(string $name, string $description, array $members = []): Department
     {
-        return $this->departmentRepository->create($data);
+        return $this->departmentRepository->create($name, $description, $members);
     }
 
     public function getById(string $id): Department

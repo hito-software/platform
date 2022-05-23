@@ -8,15 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DepartmentRepositoryImpl implements DepartmentRepository
 {
-    public function create(array $data): Department
+    public function create(string $name, string $description, array $members = []): Department
     {
-        $members = [];
-        if (!empty($data['members'])) {
-            $members = $data['members'];
-            unset($data['members']);
-        }
-
-        $department = Department::create($data);
+        $department = Department::create(compact('name', 'description'));
         $department->users()->sync($members);
 
         return $department;
@@ -39,15 +33,9 @@ class DepartmentRepositoryImpl implements DepartmentRepository
 
     public function update(string $id, array $data): void
     {
-        $members = [];
-        if (!empty($data['members'])) {
-            $members = $data['members'];
-            unset($data['members']);
-        }
         $department = $this->getById($id);
-        $department->users()->sync($members);
-        Department::findOrFail($id)->update($data);
-
+        $department->update(\Arr::except($data, ['members']));
+        $department->users()->sync(\Arr::get($data, 'members', []));
     }
 
     public function syncUsers(string $id, array $userIds): bool

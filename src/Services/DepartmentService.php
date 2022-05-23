@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 interface DepartmentService
 {
-    public function create(array $data): Department;
+    public function create(string $name, string $description, array $members = []): Department;
 
     public function getById(string $id): Department;
 
