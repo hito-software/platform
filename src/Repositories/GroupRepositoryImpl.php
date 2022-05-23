@@ -12,22 +12,11 @@ class GroupRepositoryImpl implements GroupRepository
         return Group::all();
     }
 
-    public function create(array $data): Group
+    public function create(string $name, string $description, array $users = [], array $permissions = []): Group
     {
-        $members = [];
-        if (!empty($data['members'])) {
-            $members = $data['members'];
-            unset($data['members']);
-        }
+        $group = Group::create(compact('name', 'description'));
 
-        $permissions = [];
-        if (!empty($data['permissions'])) {
-            $permissions = $data['permissions'];
-            unset($data['permissions']);
-        }
-
-        $group = Group::create($data);
-        $group->users()->sync($members);
+        $group->users()->sync($users);
         $group->permissions()->sync($permissions);
 
         return $group;
@@ -35,21 +24,11 @@ class GroupRepositoryImpl implements GroupRepository
 
     public function update(string $id, array $data): void
     {
-        $members = [];
-        if (!empty($data['members'])) {
-            $members = $data['members'];
-            unset($data['members']);
-        }
-
-        $permissions = [];
-        if (!empty($data['permissions'])) {
-            $permissions = $data['permissions'];
-            unset($data['permissions']);
-        }
         $group = $this->getById($id);
-        $group->users()->sync($members);
-        $group->permissions()->sync($permissions);
-        Group::findOrFail($id)->update($data);
+        $group->update(\Arr::except($data, ['users', 'permissions']));
+
+        $group->users()->sync(\Arr::get($data, 'users'));
+        $group->permissions()->sync(\Arr::get($data, 'permissions'));
 
     }
 

@@ -17,9 +17,9 @@ class GroupServiceImpl implements GroupService
         return $this->groupRepository->getAll();
     }
 
-    public function create(array $data): Group
+    public function create(string $name, string $description, array $users = [], array $permissions = []): Group
     {
-        return $this->groupRepository->create($data);
+        return $this->groupRepository->create($name, $description, $users, $permissions);
     }
 
     public function update(string $id, array $data): void
