@@ -1,5 +1,6 @@
 import * as Turbo from '@hotwired/turbo';
 import moment from "moment";
+import flatpickr from 'flatpickr';
 
 window.OverlayScrollbars = require('overlayscrollbars');
 window.ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
@@ -7,7 +8,7 @@ window.ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
 window.Flickity = require('flickity');
 window.Choices = require('choices.js');
 window.moment = moment;
-window.flatpickr = require('flatpickr');
+window.flatpickr = flatpickr;
 require('flickity-as-nav-for');
 require('flickity-sync');
 
