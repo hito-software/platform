@@ -82,13 +82,13 @@ class UserServiceImpl implements UserService
         return $this->userRepository->getAllPaginated();
     }
 
-    public function syncGroups(string $id, array $groupIds): bool
+    public function syncGroups(array $groupIds, User|string $user): void
     {
-        return $this->userRepository->syncGroups($id, $groupIds);
+        $this->userRepository->syncGroups($groupIds, $user);
     }
 
-    public function syncPermissions(string $id, array $permissions): bool
+    public function syncPermissions(array $permissionIds, User|string $user): void
     {
-        return $this->userRepository->syncPermissions($id, $permissions);
+        $this->userRepository->syncPermissions($permissionIds, $user);
     }
 }

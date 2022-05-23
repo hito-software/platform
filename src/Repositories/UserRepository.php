@@ -31,7 +31,7 @@ interface UserRepository
 
     public function getAllPaginated(): LengthAwarePaginator;
 
-    public function syncGroups(string $id, array $groupIds): bool;
+    public function syncGroups(array $groupIds, User|string $user): void;
 
-    public function syncPermissions(string $id, array $permissions): bool;
+    public function syncPermissions(array $permissionIds, User|string $user): void;
 }

@@ -2,6 +2,7 @@
 
 namespace Hito\Platform\Repositories;
 
+use Hito\Platform\Models\Group;
 use Hito\Platform\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,7 +20,8 @@ class UserRepositoryImpl implements UserRepository
                            ?string $whatsapp = null,
                            ?string $telegram = null): User
     {
-        $data = compact('name', 'surname', 'email', 'timezone', 'phone', 'skype', 'whatsapp', 'telegram', 'password');
+        $data = compact('name', 'surname', 'email', 'phone', 'skype', 'whatsapp', 'telegram', 'password');
+        $data['timezone_id'] = $timezone;
         $data['location_id'] = $locationId;
 
         return User::create($data);
@@ -28,7 +30,15 @@ class UserRepositoryImpl implements UserRepository
     public function update(string $id, array $data): User
     {
         $model = $this->getById($id);
-        $model->update($data);
+        $model->update(\Arr::except($data, ['groups', 'permissions']));
+
+        if ($groups = \Arr::get($data, 'groups', null)) {
+            $this->syncGroups($groups, $model);
+        }
+
+        if ($permissions = \Arr::get($data, 'permissions', null)) {
+            $this->syncPermissions($permissions, $model);
+        }
 
         return $model;
     }
@@ -58,20 +68,24 @@ class UserRepositoryImpl implements UserRepository
         return User::paginate();
     }
 
-    public function syncGroups(string $id, array $groupIds): bool
+    public function syncGroups(array $groupIds, User|string $user): void
     {
-        $user = $this->getById($id);
+        if (is_string($user)) {
+            $user = $this->getById($user);
+        }
 
-        $user->syncGroups($groupIds);
-
-        return true;
+        $groups = Group::whereIn('id', $groupIds)->get();
+        $user->syncGroups($groups);
     }
 
-    public function syncPermissions(string $id, array $permissions): bool
+    public function syncPermissions(array $permissionIds, User|string $user): void
     {
-        $user = $this->getById($id);
-        $user->syncPermissions($permissions);
+        if (is_string($user)) {
+            $user = $this->getById($user);
+        }
 
-        return true;
+        $permissions = Group::whereIn('id', $permissionIds)->get();
+
+        $user->syncPermissions($permissions);
     }
 }
