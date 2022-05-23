@@ -13,7 +13,7 @@ class Location extends Component
                                 public bool              $showTitle = true,
                                 public array|string|null $value = null,
                                 public bool              $disabled = false,
-                                public bool              $multiple = true,
+                                public bool              $multiple = false,
                                 public ?bool             $required = null)
     {
         $this->id = 'form_' . str_replace('[]', '', $name);
