@@ -12,6 +12,7 @@ class BooleanSelect extends Component
                                 public string            $name,
                                 public ?string           $placeholder = null,
                                 public array|string|null $value = null,
+                                public bool              $disabled = false,
                                 public ?bool             $required = null)
     {
         $this->id = 'form_' . str_replace('[]', '', $name);
