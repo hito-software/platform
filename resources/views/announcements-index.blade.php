@@ -12,13 +12,13 @@
         <turbo-frame id="announcements" target="_top">
         @foreach($pinned as $announcement)
             <div class="mb-4">
-                @include('announcements._announcement')
+                @include('hito::announcements._announcement')
             </div>
         @endforeach
 
         @foreach($announcements as $announcement)
             <div class="mb-4">
-                @include('announcements._announcement')
+                @include('hito::announcements._announcement')
             </div>
         @endforeach
         </turbo-frame>

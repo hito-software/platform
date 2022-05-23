@@ -14,6 +14,6 @@ class NotificationController extends Controller
     {
         $notifications = $this->notificationService->getAllPaginatedByUser(auth()->user()->id);
 
-        return view('notifications.index', compact('notifications'));
+        return view('hito::notifications.index', compact('notifications'));
     }
 }
