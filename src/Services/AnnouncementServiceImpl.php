@@ -19,15 +19,25 @@ class AnnouncementServiceImpl implements AnnouncementService
         return $this->announcementRepository->getById($id);
     }
 
-    public function create(string $name, string $description, string $content, ?Carbon $publishedAt = null,
-                           ?Carbon $startAt = null, ?Carbon $endAt = null, array $locations = []): Announcement
+    public function create(string $name,
+                           string $description,
+                           string $content,
+                           Carbon $publishedAt,
+                           ?Carbon $startAt = null,
+                           ?Carbon $endAt = null,
+                           array $locations = [],
+                           ?string $userId = null): Announcement
     {
-        if (is_null($publishedAt)) {
-            $publishedAt = now();
-        }
-
-        return $this->announcementRepository->create($name, $description, $content, $publishedAt, $startAt, $endAt,
-            $locations);
+        return $this->announcementRepository->create(
+            $name,
+            $description,
+            $content,
+            $publishedAt,
+            $startAt,
+            $endAt,
+            $locations,
+            $userId
+        );
     }
 
     public function delete(string $id): void
@@ -35,9 +45,9 @@ class AnnouncementServiceImpl implements AnnouncementService
         $this->announcementRepository->delete($id);
     }
 
-    public function update(string $id, array $data, ?array $locations = []): Announcement
+    public function update(string $id, array $data): Announcement
     {
-        return $this->announcementRepository->update($id, $data, $locations);
+        return $this->announcementRepository->update($id, $data);
     }
 
     public function getPaginated(?string $filter = null, array $exclude = [], string $orderBy = 'published_at',

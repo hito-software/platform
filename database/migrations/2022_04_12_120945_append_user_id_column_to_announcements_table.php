@@ -14,8 +14,8 @@ class AppendUserIdColumnToAnnouncementsTable extends Migration
     public function up()
     {
         Schema::table('announcements', function (Blueprint $table) {
-            $table->uuid('user_id')->after('pin_end_at')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
+            $table->foreignIdFor(\Hito\Platform\Models\User::class)->after('pin_end_at')
+                ->nullable()->constrained()->nullOnDelete();
         });
     }
 

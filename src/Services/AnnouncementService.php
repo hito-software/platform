@@ -11,12 +11,18 @@ interface AnnouncementService
 {
     public function getById(string $id): Announcement;
 
-    public function create(string $name, string $description, string $content, ?Carbon $publishedAt = null,
-                           ?Carbon $startAt = null, ?Carbon $endAt = null, array $locations = []): Announcement;
+    public function create(string $name,
+                           string $description,
+                           string $content,
+                           Carbon $publishedAt,
+                           ?Carbon $startAt = null,
+                           ?Carbon $endAt = null,
+                           array $locations = [],
+                           ?string $userId = null): Announcement;
 
     public function delete(string $id): void;
 
-    public function update(string $id, array $data, ?array $locations = []): Announcement;
+    public function update(string $id, array $data): Announcement;
 
     public function getPaginated(?string $filter = null, array $exclude = [], string $orderBy = 'published_at',
                                  string $orderDirection = 'DESC'): LengthAwarePaginator;

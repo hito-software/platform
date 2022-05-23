@@ -14,14 +14,22 @@ class AnnouncementRepositoryImpl implements AnnouncementRepository
         return \Cache::remember("announcement-{$id}", now()->addDays(7), fn() => Announcement::findOrFail($id));
     }
 
-    public function create(string $name, string $description, string $content, Carbon $publishedAt,
-                           ?Carbon $startAt = null, ?Carbon $endAt = null, array $locations = []): Announcement
+    public function create(string $name,
+                           string $description,
+                           string $content,
+                           Carbon $publishedAt,
+                           ?Carbon $startAt = null,
+                           ?Carbon $endAt = null,
+                           array $locations = [],
+                           ?string $userId = null): Announcement
     {
         $announcement = Announcement::create([
             ...compact('name', 'description', 'content'),
-            ...['published_at' => $publishedAt,
+            ...[
+                'published_at' => $publishedAt,
                 'pin_start_at' => $startAt,
-                'pin_end_at' => $endAt
+                'pin_end_at' => $endAt,
+                'user_id' => $userId
             ]
         ]);
 
@@ -35,12 +43,12 @@ class AnnouncementRepositoryImpl implements AnnouncementRepository
         Announcement::findOrFail($id)->delete();
     }
 
-    public function update(string $id, array $data, ?array $locations = []): Announcement
+    public function update(string $id, array $data): Announcement
     {
         $model = $this->getById($id);
-        $model->update($data);
+        $model->update(\Arr::except($data, ['locations']));
 
-        $model->locations()->sync($locations);
+        $model->locations()->sync(\Arr::get($data, 'locations', []));
 
         return $model;
     }
