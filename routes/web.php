@@ -2,7 +2,6 @@
 
 use Hito\Platform\Http\Controllers\AccountController;
 use Hito\Platform\Http\Controllers\AnnouncementController;
-use Hito\Platform\Http\Controllers\AuthController;
 use Hito\Platform\Http\Controllers\ClientController;
 use Hito\Platform\Http\Controllers\DashboardController;
 use Hito\Platform\Http\Controllers\DepartmentController;
