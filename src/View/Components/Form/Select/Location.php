@@ -12,7 +12,8 @@ class Location extends Component
     public function __construct(public string            $name,
                                 public bool              $showTitle = true,
                                 public array|string|null $value = null,
-                                public bool $disabled = false,
+                                public bool              $disabled = false,
+                                public bool              $multiple = true,
                                 public ?bool             $required = null)
     {
         $this->id = 'form_' . str_replace('[]', '', $name);
@@ -21,15 +22,13 @@ class Location extends Component
 
     public function render()
     {
-        $multiple = str_contains($this->name, '[]');
-
         if ($this->showTitle) {
-            $title = $multiple ? 'Locations' : 'Location';
+            $title = $this->multiple ? 'Locations' : 'Location';
         } else {
             $title = null;
         }
 
-        $note = !$this->required && $multiple ? 'If empty, all locations are selected' : null;
+        $note = !$this->required && $this->multiple ? 'If empty, all locations are selected' : null;
 
         $placeholder = 'Select location';
         $items = app(LocationService::class)->getAll()->map(fn($location) => [
