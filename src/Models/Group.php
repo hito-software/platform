@@ -35,4 +35,5 @@ use Str;
  */
 class Group extends Role
 {
+    use Uuid;
 }
