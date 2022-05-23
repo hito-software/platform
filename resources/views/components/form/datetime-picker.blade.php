@@ -1,4 +1,4 @@
-<x-Hito::Form.Input :title="$title" :name="$name" :required="!empty($required) ? $required : null"
+<x-hito::Form.Input :title="$title" :name="$name" :required="!empty($required) ? $required : null"
     :value="old($name, $value)"
     :disabled="$disabled"
     :clear="!$disabled && empty($required)" />
