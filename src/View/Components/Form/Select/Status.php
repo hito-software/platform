@@ -10,13 +10,13 @@ class Status extends Component
 
     public function __construct(
         public string $name,
-        public \App\Enums\Status|string|null $value = null,
+        public \Hito\Admin\Enums\Status|string|null $value = null,
         public ?bool $required = null,
         public bool $disabled = false
     ) {
         $this->id = 'form_' . str_replace('[]', '', $name);
 
-        if ($value instanceof \App\Enums\Status) {
+        if ($value instanceof \Hito\Admin\Enums\Status) {
             $this->value = $value->value;
         }
     }
@@ -27,7 +27,7 @@ class Status extends Component
 
         $placeholder = __('app.select-status');
 
-        $items = collect(\App\Enums\Status::cases())->map(fn ($status) => [
+        $items = collect(\Hito\Admin\Enums\Status::cases())->map(fn ($status) => [
             'value' => $status->value,
             'label' => $status->toString()
         ])->toArray();
