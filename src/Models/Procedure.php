@@ -2,6 +2,7 @@
 
 namespace Hito\Platform\Models;
 
+use Hito\Admin\Enums\Status;
 use Hito\Core\Database\Traits\Uuid;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,6 +68,7 @@ class Procedure extends Model
 
     protected $casts = [
         'published_at' => 'datetime',
+        'status' => Status::class
     ];
 
     public function locations(): BelongsToMany

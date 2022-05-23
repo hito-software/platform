@@ -13,12 +13,18 @@ class ProcedureRepositoryImpl implements ProcedureRepository
         return Procedure::findOrFail($id);
     }
 
-    public function create(string $name, string $description, string $content, string $status,
-                           ?Carbon $publishedAt = null, ?array $locations = []): Procedure
+    public function create(string $name,
+                           string $description,
+                           string $content,
+                           string $status,
+                           ?Carbon $publishedAt = null,
+                           ?array $locations = []): Procedure
     {
         $procedure = Procedure::create([
             ...compact('name', 'description', 'content', 'status'),
-            ...['published_at' => $publishedAt]
+            ...[
+                'published_at' => $publishedAt
+            ]
         ]);
 
         $procedure->locations()->sync($locations);
@@ -31,12 +37,12 @@ class ProcedureRepositoryImpl implements ProcedureRepository
         Procedure::findOrFail($id)->delete();
     }
 
-    public function update(string $id, array $data, ?array $locations = []): Procedure
+    public function update(string $id, array $data): Procedure
     {
         $model = $this->getById($id);
-        $model->update($data);
+        $model->update(\Arr::except($data, ['locations']));
 
-        $model->locations()->sync($locations);
+        $model->locations()->sync(\Arr::get($data, 'locations', []));
 
         return $model;
     }

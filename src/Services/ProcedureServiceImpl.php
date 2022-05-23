@@ -18,8 +18,12 @@ class ProcedureServiceImpl implements ProcedureService
         return $this->procedureRepository->getById($id);
     }
 
-    public function create(string $name, string $description, string $content, string $status,
-                           ?Carbon $publishedAt = null, ?array $locations = []): Procedure
+    public function create(string $name,
+                           string $description,
+                           string $content,
+                           string $status,
+                           ?Carbon $publishedAt = null,
+                           ?array $locations = []): Procedure
     {
         if ($status === 'DRAFT') {
             $publishedAt = null;
@@ -35,9 +39,9 @@ class ProcedureServiceImpl implements ProcedureService
         $this->procedureRepository->delete($id);
     }
 
-    public function update(string $id, array $data, ?array $locations = []): Procedure
+    public function update(string $id, array $data): Procedure
     {
-        return $this->procedureRepository->update($id, $data, $locations);
+        return $this->procedureRepository->update($id, $data);
     }
 
     public function getPaginated( ?string $status = null): LengthAwarePaginator

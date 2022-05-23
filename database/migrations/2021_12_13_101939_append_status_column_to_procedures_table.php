@@ -14,7 +14,7 @@ class AppendStatusColumnToProceduresTable extends Migration
     public function up()
     {
         Schema::table('procedures', function (Blueprint $table) {
-            $table->enum('status', ['DRAFT', 'PUBLISHED'])->default('DRAFT')->after('content');
+            $table->string('status')->after('content');
         });
     }
 
