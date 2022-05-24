@@ -62,8 +62,7 @@ class Procedure extends Model
         'description',
         'content',
         'published_at',
-        'status',
-        'user_id'
+        'status'
     ];
 
     protected $casts = [

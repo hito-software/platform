@@ -16,5 +16,5 @@ interface LocationService
 
     public function getAllPaginated(): LengthAwarePaginator;
 
-    public function update(string $id, array $data, ?string $userId = null): Location;
+    public function update(string $id, array $data): Location;
 }

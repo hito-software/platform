@@ -23,9 +23,9 @@ class ProjectServiceImpl implements ProjectService
         return $this->projectRepository->getAllPaginated();
     }
 
-    public function create(string $name, string $clientId, ?string $countryId=null, ?string $address = null, ?array $team = [], ?string $description = null, ?string $userId = null): Project
+    public function create(string $name, string $clientId, ?string $countryId=null, ?string $address = null, ?array $team = [], ?string $description = null): Project
     {
-        return $this->projectRepository->create($name, $clientId, $countryId, $address, $team, $description, $userId);
+        return $this->projectRepository->create($name, $clientId, $countryId, $address, $team, $description);
     }
 
     public function getById(string $id): Project

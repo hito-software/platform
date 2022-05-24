@@ -50,8 +50,7 @@ class Client extends Model
         'name',
         'description',
         'country_id',
-        'address',
-        'user_id'
+        'address'
     ];
 
     /**

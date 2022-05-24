@@ -49,8 +49,7 @@ class Role extends Model
         'entity_type',
         'name',
         'description',
-        'required',
-        'user_id'
+        'required'
     ];
 
     /**

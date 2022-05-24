@@ -31,12 +31,8 @@ class LocationRepositoryImpl implements LocationRepository
         return Location::paginate();
     }
 
-    public function update(string $id, array $data, ?string $userId = null): Location
+    public function update(string $id, array $data): Location
     {
-        if (is_null($userId)) {
-            $data['user_id'] = $userId;
-        }
-
         $model = $this->getById($id);
         $model->update($data);
 

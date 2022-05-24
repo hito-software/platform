@@ -19,10 +19,9 @@ class ProjectRepositoryImpl implements ProjectRepository
         return Project::with('teams')->with('country')->paginate();
     }
 
-    public function create(string $name, string $clientId, ?string $countryId=null, ?string $address = null, ?array $team = [], ?string $description = null, ?string $userId = null): Project
+    public function create(string $name, string $clientId, ?string $countryId=null, ?string $address = null, ?array $team = [], ?string $description = null): Project
     {
         $data = compact('name', 'address', 'team', 'description');
-        $data['user_id'] = $userId;
         $data['client_id'] = $clientId;
         $data['country_id'] = $countryId;
 

@@ -33,8 +33,8 @@ class LocationServiceImpl implements LocationService
         return $this->locationRepository->getAllPaginated();
     }
 
-    public function update(string $id, array $data, ?string $userId = null): Location
+    public function update(string $id, array $data): Location
     {
-        return $this->locationRepository->update($id, $data, $userId);
+        return $this->locationRepository->update($id, $data);
     }
 }

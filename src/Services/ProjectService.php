@@ -14,7 +14,7 @@ interface ProjectService
 
     public function getAllPaginated(): LengthAwarePaginator;
 
-    public function create(string $name, string $clientId, ?string $countryId=null, ?string $address = null, ?array $team = [], ?string $description = null, ?string $userId = null): Project;
+    public function create(string $name, string $clientId, ?string $countryId=null, ?string $address = null, ?array $team = [], ?string $description = null): Project;
 
     public function getById(string $id): Project;
 

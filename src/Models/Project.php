@@ -64,8 +64,7 @@ class Project extends Model
         'description',
         'country_id',
         'client_id',
-        'address',
-        'user_id'
+        'address'
     ];
 
     /**

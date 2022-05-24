@@ -16,5 +16,5 @@ interface LocationRepository
 
     public function getById(string $id): Location;
 
-    public function update(string $id, array $data, ?string $userId = null): Location;
+    public function update(string $id, array $data): Location;
 }
