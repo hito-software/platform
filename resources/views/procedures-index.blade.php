@@ -13,7 +13,7 @@
         <turbo-frame id="procedures" target="_top">
         @foreach($procedures as $procedure)
             <div class="mb-4">
-                @include('procedures._procedure')
+                @include('hito::procedures._procedure')
             </div>
         @endforeach
         </turbo-frame>
