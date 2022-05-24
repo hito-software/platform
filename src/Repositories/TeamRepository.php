@@ -3,7 +3,6 @@
 namespace Hito\Platform\Repositories;
 
 use Hito\Platform\Models\Team;
-use Hito\Platform\Models\Role;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,7 +12,7 @@ interface TeamRepository
 
     public function getAllPaginated(): LengthAwarePaginator;
 
-    public function create(string $name, ?string $description = null, ?string $userId = null): Team;
+    public function create(string $name, ?string $description = null): Team;
 
     public function getById(string $id): Team;
 

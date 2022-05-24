@@ -49,13 +49,9 @@ class Team extends Model
     use SoftDeletes;
     use Uuid;
 
-    protected $with = [
-    ];
-
     protected $fillable = [
         'name',
-        'description',
-        'user_id',
+        'description'
     ];
 
     /**

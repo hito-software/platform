@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Hito\Platform\Services;
-
 
 use Hito\Platform\Models\Team;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -14,7 +12,7 @@ interface TeamService
 
     public function getAllPaginated(): LengthAwarePaginator;
 
-    public function create(string $name, ?string $description = null, ?string $userId = null): Team;
+    public function create(string $name, ?string $description = null): Team;
 
     public function getById(string $id): Team;
 

@@ -20,10 +20,9 @@ class TeamRepositoryImpl implements TeamRepository
         return Team::with('projects')->paginate();
     }
 
-    public function create(string $name, ?string $description = null, ?string $userId = null): Team
+    public function create(string $name, ?string $description = null): Team
     {
         $data = compact('name', 'description');
-        $data['user_id'] = $userId;
 
         return Team::create($data);
     }
