@@ -1,10 +1,12 @@
 <?php
 
+use Hito\Platform\Models\Announcement;
+use Hito\Platform\Models\Location;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnnouncementLocationTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +16,8 @@ class CreateAnnouncementLocationTable extends Migration
     public function up()
     {
         Schema::create('announcement_location', function (Blueprint $table) {
-            $table->uuid('announcement_id');
-            $table->uuid('location_id');
-
-            $table->foreign('announcement_id')->references('id')->on('announcements')
-                ->cascadeOnDelete();
-            $table->foreign('location_id')->references('id')->on('locations')
-                ->cascadeOnDelete();
+            $table->foreignIdFor(Announcement::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Location::class)->constrained()->cascadeOnDelete();
         });
     }
 
@@ -33,4 +30,4 @@ class CreateAnnouncementLocationTable extends Migration
     {
         Schema::dropIfExists('announcement_location');
     }
-}
+};

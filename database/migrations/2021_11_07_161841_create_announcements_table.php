@@ -1,10 +1,11 @@
 <?php
 
+use Hito\Platform\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnnouncementsTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -18,9 +19,10 @@ class CreateAnnouncementsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->longText('content');
-            $table->timestamp('published_at');
+            $table->timestamp('published_at')->nullable();
             $table->timestamp('pin_start_at')->nullable();
             $table->timestamp('pin_end_at')->nullable();
+            $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,4 +37,4 @@ class CreateAnnouncementsTable extends Migration
     {
         Schema::dropIfExists('announcements');
     }
-}
+};

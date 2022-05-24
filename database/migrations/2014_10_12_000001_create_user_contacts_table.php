@@ -1,6 +1,8 @@
 <?php
 
-use Hito\Platform\Models\Country;
+use Hito\Platform\Models\Location;
+use Hito\Platform\Models\Timezone;
+use Hito\Platform\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,14 +16,12 @@ return new class () extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('user_contacts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
-            $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
-            $table->text('address')->nullable();
+            $table->string('type');
+            $table->string('value')->nullable();
+            $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +32,6 @@ return new class () extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('user_contacts');
     }
 };

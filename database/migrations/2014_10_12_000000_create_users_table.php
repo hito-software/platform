@@ -1,10 +1,12 @@
 <?php
 
+use Hito\Platform\Models\Location;
+use Hito\Platform\Models\Timezone;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -17,18 +19,15 @@ class CreateUsersTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('surname');
+            $table->date('birthdate')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('skype')->nullable();
-            $table->string('whatsapp')->nullable();
-            $table->string('telegram')->nullable();
-            $table->uuid('timezone_id');
             $table->boolean('is_super_admin')->default(false);
+            $table->foreignIdFor(Location::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Timezone::class)->nullable()->constrained()->restrictOnDelete();
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('timezone_id')->references('id')->on('timezones')->restrictOnDelete();
         });
     }
 
@@ -41,4 +40,4 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
     }
-}
+};

@@ -1,10 +1,12 @@
 <?php
 
+use Hito\Platform\Models\Client;
+use Hito\Platform\Models\Country;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectsTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -17,14 +19,11 @@ class CreateProjectsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->uuid('country_id')->nullable();
+            $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
             $table->text('address')->nullable();
-            $table->uuid('client_id')->nullable();
+            $table->foreignIdFor(Client::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('client_id')->references('id')->on('clients')->nullOnDelete();
-            $table->foreign('country_id')->references('id')->on('countries')->nullOnDelete();
         });
     }
 
@@ -37,4 +36,4 @@ class CreateProjectsTable extends Migration
     {
         Schema::dropIfExists('projects');
     }
-}
+};

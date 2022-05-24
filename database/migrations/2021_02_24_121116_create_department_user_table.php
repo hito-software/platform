@@ -1,10 +1,12 @@
 <?php
 
+use Hito\Platform\Models\Department;
+use Hito\Platform\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepartmentUserTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +16,11 @@ class CreateDepartmentUserTable extends Migration
     public function up()
     {
         Schema::create('department_user', function (Blueprint $table) {
-            $table->uuid('department_id');
-            $table->uuid('user_id');
-            $table->integer('priority')->default(0);
+            $table->foreignIdFor(Department::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->unsignedInteger('priority')->default(0);
             $table->timestamps();
 
-            $table->foreign('department_id')->references('id')->on('departments')->cascadeOnDelete();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->unique(['department_id', 'user_id']);
         });
     }
@@ -34,4 +34,4 @@ class CreateDepartmentUserTable extends Migration
     {
         Schema::dropIfExists('department_members');
     }
-}
+};

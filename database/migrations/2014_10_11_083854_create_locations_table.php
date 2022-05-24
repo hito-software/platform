@@ -1,10 +1,11 @@
 <?php
 
+use Hito\Platform\Models\Country;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocationsTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -17,12 +18,10 @@ class CreateLocationsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->uuid('country_id')->nullable();
+            $table->foreignIdFor(Country::class)->nullable()->constrained()->nullOnDelete();
             $table->string('address');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('country_id')->references('id')->on('countries')->nullOnDelete();
         });
     }
 
@@ -35,4 +34,4 @@ class CreateLocationsTable extends Migration
     {
         Schema::dropIfExists('locations');
     }
-}
+};

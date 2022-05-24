@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProceduresTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -18,9 +18,10 @@ class CreateProceduresTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->longText('content');
+            $table->string('status');
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->timestamp('published_at')->nullable();
         });
     }
 
@@ -33,4 +34,4 @@ class CreateProceduresTable extends Migration
     {
         Schema::dropIfExists('procedures');
     }
-}
+};

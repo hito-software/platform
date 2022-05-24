@@ -1,10 +1,12 @@
 <?php
 
+use Hito\Platform\Models\Location;
+use Hito\Platform\Models\Procedure;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocationProcedureTable extends Migration
+return new class () extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +16,8 @@ class CreateLocationProcedureTable extends Migration
     public function up()
     {
         Schema::create('location_procedure', function (Blueprint $table) {
-            $table->uuid('procedure_id');
-            $table->uuid('location_id');
-
-            $table->foreign('procedure_id')->references('id')->on('procedures')
-                ->cascadeOnDelete();
-            $table->foreign('location_id')->references('id')->on('locations')
-                ->cascadeOnDelete();
+            $table->foreignIdFor(Procedure::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Location::class)->constrained()->cascadeOnDelete();
         });
     }
 
@@ -33,4 +30,4 @@ class CreateLocationProcedureTable extends Migration
     {
         Schema::dropIfExists('location_procedure');
     }
-}
+};
