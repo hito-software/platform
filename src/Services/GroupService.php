@@ -11,7 +11,7 @@ interface GroupService
 {
     public function getAll(): Collection;
 
-    public function create(string $name, string $description, array $users = [], array $permissions = []): Group;
+    public function create(string $name, ?string $description = null, array $users = [], array $permissions = []): Group;
 
     public function update(string $id, array $data): void;
 

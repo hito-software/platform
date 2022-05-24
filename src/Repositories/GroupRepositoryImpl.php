@@ -12,7 +12,7 @@ class GroupRepositoryImpl implements GroupRepository
         return Group::all();
     }
 
-    public function create(string $name, string $description, array $users = [], array $permissions = []): Group
+    public function create(string $name, ?string $description = null, array $users = [], array $permissions = []): Group
     {
         $group = Group::create(compact('name', 'description'));
 
