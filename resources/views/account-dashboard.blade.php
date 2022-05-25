@@ -11,7 +11,7 @@
                     <div class="account_list">
                         @foreach($menu->items as $item)
                             <div class="account_list__item">
-                                <a href="{{ route($item->route) }}" class="account_list__link">
+                                <a href="{{ route($item->route, $item->routeParams) }}" class="account_list__link">
                                     <span class="account_list__icon"><i class="{{ $item->icon }}"></i></span>
                                     <h2 class="account_list__title">{{ $item->name }}</h2>
                                     <i class="fas fa-chevron-right account_list__arrow"></i>

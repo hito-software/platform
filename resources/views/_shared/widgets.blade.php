@@ -38,7 +38,7 @@
                     <div class="text-4xl font-bold ">{{ $monthBirthdays->count() }}</div>
                 </div>
                 <div class="block text-sm text-white font-bold uppercase tracking-widest text-center">
-                    <div>birthdays</div>
+                    <div>birthdays coming</div>
                     <div>this month</div>
                 </div>
             </div>

@@ -52,38 +52,38 @@
 
 <div class="show-layout__left_mobile">
     <div class="show-layout__left_items">
-        @if (isset($user->skype))
-            <a href="skype:{{ $user->skype }}?chat" title="Skype" data-tooltip
-               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#00aff0]">
-                <i class="fab fa-skype"></i>
-            </a>
-        @endif
-
-        @if (isset($user->whatsapp))
-            <a class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#25D366]"
-               href="https://api.whatsapp.com/send?phone={{ $user->whatsapp }}" title="WhatsApp"
-               data-tooltip>
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        @endif
-
-        @if (isset($user->telegram))
-            <a href="https://telegram.me/{{ $user->telegram }}" title="Telegram" data-tooltip
-               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#2AABEE]">
-                <i class="fab fa-telegram-plane"></i>
-            </a>
-        @endif
-
-            @if (isset($user->email))
+        @if (!empty($user->email))
             <a href="mailto:{{ $user->email }}" title="Mail" data-tooltip
                class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white  bg-[#EA4335]">
                 <i class="far fa-envelope"></i>
             </a>
         @endif
 
-        @if (isset($user->phone))
-            <a href="tel:+12215555555" title="Phone" data-tooltip class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-blue-700">
+        @if (!is_null($user->getContact('phone')))
+            <a href="tel:{{ $user->getContact('phone') }}" title="Phone" data-tooltip class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-blue-700">
                 <i class="fas fa-mobile-alt"></i>
+            </a>
+        @endif
+
+        @if (!is_null($user->getContact('whatsapp')))
+            <a class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#25D366]"
+               href="https://api.whatsapp.com/send?phone={{ $user->getContact('whatsapp') }}" title="WhatsApp"
+               data-tooltip>
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        @endif
+
+        @if (!is_null($user->getContact('telegram')))
+            <a href="https://telegram.me/{{ $user->getContact('telegram') }}" title="Telegram" data-tooltip
+               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#2AABEE]">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        @endif
+
+        @if (!is_null($user->getContact('skype')))
+            <a href="skype:{{ $user->getContact('skype') }}?chat" title="Skype" data-tooltip
+               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#00aff0]">
+                <i class="fab fa-skype"></i>
             </a>
         @endif
     </div>
@@ -97,28 +97,6 @@
 @section('header-additional-info')
 <div class="show-layout__left_container">
     <div class="show-layout__left_items">
-        @if (isset($user->skype))
-            <a href="skype:{{ $user->skype }}?chat" title="Skype" data-tooltip
-               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#00aff0]">
-                <i class="fab fa-skype"></i>
-            </a>
-        @endif
-
-        @if (isset($user->whatsapp))
-            <a class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#25D366]"
-               href="https://api.whatsapp.com/send?phone={{ $user->whatsapp }}" title="WhatsApp"
-               data-tooltip>
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        @endif
-
-        @if (isset($user->telegram))
-            <a href="https://telegram.me/{{ $user->telegram }}" title="Telegram" data-tooltip
-               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#2AABEE]">
-                <i class="fab fa-telegram-plane"></i>
-            </a>
-        @endif
-
         @if (isset($user->email))
             <a href="mailto:{{ $user->email }}" title="Mail" data-tooltip
                class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#EA4335]">
@@ -126,9 +104,31 @@
             </a>
         @endif
 
-        @if (isset($user->phone))
-            <a href="tel:+12215555555" title="Phone" data-tooltip class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-blue-700">
+        @if (!is_null($user->getContact('phone')))
+            <a href="tel:{{ $user->getContact('phone') }}" title="Phone" data-tooltip class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-blue-700">
                 <i class="fas fa-mobile-alt"></i>
+            </a>
+        @endif
+
+        @if (!is_null($user->getContact('whatsapp')))
+            <a class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#25D366]"
+               href="https://api.whatsapp.com/send?phone={{ $user->getContact('whatsapp') }}" title="WhatsApp"
+               data-tooltip>
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        @endif
+
+        @if (!is_null($user->getContact('telegram')))
+            <a href="https://telegram.me/{{ $user->getContact('telegram') }}" title="Telegram" data-tooltip
+               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#2AABEE]">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        @endif
+
+        @if (!is_null($user->getContact('skype')))
+            <a href="skype:{{ $user->getContact('skype') }}?chat" title="Skype" data-tooltip
+               class="rounded overflow-hidden w-[2rem] h-[2rem] flex justify-center items-center text-white bg-[#00aff0]">
+                <i class="fab fa-skype"></i>
             </a>
         @endif
     </div>
