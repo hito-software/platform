@@ -1,6 +1,6 @@
 @mixin styles($parent) {
     #{$parent}__card {
-        @apply rounded-md shadow-md shadow-black/25 w-full mx-auto flex flex-col justify-between bg-white relative;
+        @apply rounded-lg shadow-md shadow-black/25 w-full mx-auto flex flex-col justify-between bg-white relative;
 
         &__list {
             @apply grid grid-cols-1 gap-6;

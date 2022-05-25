@@ -7,13 +7,12 @@ use Illuminate\View\Component;
 class DeleteForm extends Component
 {
     public function __construct(
-        public string $noAction,
-        public string $entity,
-        public string $title,
-        public string $description,
-        public ?string $actionButton = null,
-        public ?string $noActionButton = null,
-        public ?string $action = null
+        public string  $title,
+        public ?string  $description = null,
+        public ?string $cancelUrl = null,
+        public ?string $submitButton = null,
+        public ?string $cancelButton = null,
+        public ?string $destroyUrl = null
     ) {
     }
 

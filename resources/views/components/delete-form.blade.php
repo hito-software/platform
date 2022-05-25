@@ -1,7 +1,5 @@
-@props(['action' => '', 'noAction' => '', 'entity' => ''])
-
-@if (!empty($action))
-    <form action="{{ $action }}" method="post">
+@if (!empty($destroyUrl) && !empty($submitButton))
+    <form action="{{ $destroyUrl }}" method="post">
         @csrf
         @method('delete')
 @endif
@@ -18,19 +16,22 @@
         {{ $slot }}
     </div>
     <div class="mt-5 flex justify-center space-x-4">
-        @if (!empty($action))
+        @if (!empty($destroyUrl) && !empty($submitButton))
             <div>
                 <button type="submit"
-                    class="rounded bg-black bg-opacity-40 py-2 px-4 font-bold uppercase hover:bg-opacity-60">{{ $actionButton ?? __('app.yes') }}</button>
+                    class="rounded bg-black bg-opacity-40 py-2 px-4 font-bold uppercase hover:bg-opacity-60">{{ $submitButton }}</button>
             </div>
         @endif
+
+        @if(!empty($cancelUrl))
         <div>
-            <a href="{{ $noAction }}"
-                class="block rounded bg-black bg-opacity-25 py-2 px-4 font-bold hover:bg-opacity-60">{{ $noActionButton ?? __('app.no') }}</a>
+            <a href="{{ $cancelUrl }}"
+                class="block rounded bg-black bg-opacity-25 py-2 px-4 font-bold hover:bg-opacity-60">{{ $cancelButton }}</a>
         </div>
+        @endif
     </div>
 </div>
 
-@if (!empty($action))
+@if (!empty($destroyUrl) && !empty($submitButton))
     </form>
 @endif

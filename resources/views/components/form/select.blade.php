@@ -5,7 +5,7 @@
     @endif
 
     @if ($disabled && ((!is_bool($value) && $value != 0 && empty($value)) || is_null($value)))
-        <x-hito::alert>{!! __('app.field-value-not-set', ['field' => strtolower($title)]) !!}</x-alert>
+        <x-hito::alert>{!! __('hito::components.general.field-value-not-set', ['field' => strtolower($title)]) !!}</x-alert>
     @else
         <select name="{{ !empty($multiple) ? "{$name}[]" : $name }}"
             id="{{ $id }}"

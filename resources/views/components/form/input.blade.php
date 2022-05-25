@@ -5,7 +5,7 @@
     @endif
 
     @if ($disabled && (empty($value) && $value !== '0'))
-        <x-hito::alert>{!! __('app.field-value-not-set', ['field' => strtolower($title)]) !!}</x-alert>
+        <x-hito::alert>{!! __('hito::components.general.field-value-not-set', ['field' => strtolower($title)]) !!}</x-alert>
     @else
         <div class="hito-component__form-input @error($name) hito-component__form-input--error @enderror">
             @if ($attributes->get('type') === 'textarea')

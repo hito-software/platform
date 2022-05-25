@@ -5,7 +5,7 @@
     @endif
 
     @if ($disabled && empty($value))
-        <x-hito::alert>{!! __('app.field-value-not-set', ['field' => strtolower($title)]) !!}</x-alert>
+        <x-hito::alert>{!! __('hito::components.general.field-value-not-set', ['field' => strtolower($title)]) !!}</x-alert>
     @else
         <div class="flex justify-between">
             <div>
