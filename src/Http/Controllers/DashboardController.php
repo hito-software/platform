@@ -46,9 +46,14 @@ class DashboardController extends Controller
      */
     private function getTodaysBirthdays(): Collection
     {
-        $users = $this->userService->getAll();
-        $totalUsers = $users->count();
-        return $users->random(random_int(0, $totalUsers));
+        $location = auth()->user()->location_id;
+
+        if (is_null($location)) {
+            return collect(); // @phpstan-ignore-line
+        }
+
+        return User::whereDate('birthdate', now())
+            ->where('location_id', $location)->get();
     }
 
     /**
@@ -57,8 +62,14 @@ class DashboardController extends Controller
      */
     private function getCurrentMonthBirthdays(): Collection
     {
-        $users = $this->userService->getAll();
-        $totalUsers = $users->count();
-        return $users->random(random_int(0, $totalUsers));
+        $location = auth()->user()->location_id;
+
+        if (is_null($location)) {
+            return collect(); // @phpstan-ignore-line
+        }
+
+        return User::whereBetween('birthdate', [now(), now()->endOfMonth()])
+            ->where('location_id', $location)
+            ->get();
     }
 }

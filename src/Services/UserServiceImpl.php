@@ -2,6 +2,7 @@
 
 namespace Hito\Platform\Services;
 
+use Carbon\Carbon;
 use Hito\Platform\Models\User;
 use Hito\Platform\Repositories\UserRepository;
 use Faker\Factory;
@@ -19,6 +20,7 @@ class UserServiceImpl implements UserService
                            string $email,
                            string $locationId,
                            string $timezone,
+                           ?Carbon $birthdate = null,
                            ?string $phone = null,
                            ?string $skype = null,
                            ?string $whatsapp = null,
@@ -39,6 +41,7 @@ class UserServiceImpl implements UserService
             $password,
             $locationId,
             $timezone,
+            $birthdate,
             $phone,
             $skype,
             $whatsapp,

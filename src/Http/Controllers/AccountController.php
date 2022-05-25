@@ -2,7 +2,10 @@
 
 namespace Hito\Platform\Http\Controllers;
 
+use Hito\Core\Module\DTO\MenuDTO;
+use Hito\Core\Module\DTO\MenuItemDTO;
 use Hito\Core\Module\Facades\Menu;
+use Hito\Platform\Http\Requests\UpdateUserRequest;
 use Illuminate\Contracts\View\View;
 use Hito\Platform\Services\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -21,6 +24,7 @@ class AccountController extends Controller
      */
     public function dashboard(): View
     {
+        $this->createMenus();
         $menus = Menu::getAllByUser(auth()->user(), 'account');
 
         return view('hito::account-dashboard', compact('menus'));
@@ -40,31 +44,14 @@ class AccountController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param UpdateUserRequest $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function updateProfile(Request $request): RedirectResponse
+    public function updateProfile(UpdateUserRequest $request): RedirectResponse
     {
         $user = auth()->user();
 
-        $this->validate($request, [
-            'name' => 'required',
-            'surname' => 'required',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users')->ignoreModel($user)
-            ],
-            'phone' => 'nullable|numeric|regex:/^[\+]?[0-9]{4,20}$/',
-            'skype' => 'nullable',
-            'whatsapp' => 'nullable',
-            'telegram' => 'nullable',
-            'location' => 'required|uuid',
-            'timezone' => 'required|uuid',
-
-        ]);
-        $data = request()->only(['name', 'surname', 'email', 'phone', 'skype', 'whatsapp', 'telegram']);
+        $data = request()->only(['name', 'surname', 'email', 'phone', 'skype', 'whatsapp', 'telegram', 'birthdate']);
         $data['location_id'] = request('location');
         $data['timezone_id'] = request('timezone');
 
@@ -99,5 +86,26 @@ class AccountController extends Controller
 
         $this->userService->update($user->id, request()->only('password'));
         return back()->with('success', 'Your password was updated successfully');
+    }
+
+    private function createMenus(): void
+    {
+        $menu = new MenuDTO('general', 'General', 'fas fa-users', order: 1, group: 'account');
+        $menu->addItem(new MenuItemDTO('Account information', 'account.edit-profile', 'fas fa-user', 'users.update-own'));
+        $menu->addItem(new MenuItemDTO('My profile', ['users.show', auth()->id()], 'fas fa-user', 'users.update-own'));
+        Menu::add($menu);
+
+        $menu = new MenuDTO('security', 'Security', 'fas fa-users', order: 2, group: 'account');
+        $menu->addItem(new MenuItemDTO('Password', 'account.edit-password', 'fas fa-unlock',
+            'users.update-own'));
+        $menu->addItem(new MenuItemDTO('Two factor authentication', 'account.dashboard',
+            'fas fa-fingerprint', 'users.update-own'));
+        Menu::add($menu);
+
+        $menu = new MenuDTO('other', 'Other', 'fas fa-users', order: 3, group: 'account');
+        $menu->addItem(new MenuItemDTO('Notifications', 'notifications.index', 'fas fa-bell'));
+        $menu->addItem(new MenuItemDTO('Help', 'account.dashboard', 'fas fa-question-circle'));
+        $menu->addItem(new MenuItemDTO('Logout', 'auth.logout', 'fas fa-sign-out-alt'));
+        Menu::add($menu);
     }
 }

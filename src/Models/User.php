@@ -3,9 +3,11 @@
 namespace Hito\Platform\Models;
 
 use Hash;
+use Hito\Admin\Enums\ContactType;
 use Hito\Core\Database\Traits\Uuid;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -28,10 +30,7 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
-        'skype',
-        'whatsapp',
-        'telegram',
-        'phone',
+        'birthdate',
         'location_id',
         'timezone_id'
     ];
@@ -53,7 +52,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_super_admin' => 'boolean'
+        'is_super_admin' => 'boolean',
+        'birthdate' => 'date'
     ];
 
     /**
@@ -113,7 +113,7 @@ class User extends Authenticatable
 
     public function getHasBirthdayTodayAttribute(): bool
     {
-        return (random_int(0, 10) === 3);
+        return $this->birthdate?->isToday() ?? false;
     }
 
     /**
@@ -123,5 +123,27 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token): void
     {
         $this->notify(new CustomResetPassword($token));
+    }
+
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(UserContact::class);
+    }
+
+    public function getContact(string|ContactType $type): ?string
+    {
+        if (is_string($type)) {
+            $type = ContactType::from($type);
+        }
+
+        $contact = $this->contacts()->where('type', $type)->first();
+
+        $value = $contact?->value;
+
+        if (empty($value)) {
+            return null;
+        }
+
+        return $value;
     }
 }

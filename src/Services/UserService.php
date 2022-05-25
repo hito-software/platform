@@ -2,6 +2,7 @@
 
 namespace Hito\Platform\Services;
 
+use Carbon\Carbon;
 use Hito\Platform\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,6 +14,7 @@ interface UserService
                            string $email,
                            string $locationId,
                            string $timezone,
+                           ?Carbon $birthdate = null,
                            ?string $phone = null,
                            ?string $skype = null,
                            ?string $whatsapp = null,

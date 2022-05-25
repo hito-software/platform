@@ -5,7 +5,6 @@ namespace Hito\Platform;
 use Hito\Core\BaseServiceProvider;
 use Hito\Core\Database\Enums\SeederType;
 use Hito\Core\Database\Facades\DatabaseSeeder;
-use Hito\Platform\Providers\MenuServiceProvider;
 use Hito\Platform\Providers\TranslationServiceProvider;
 use Hito\Platform\Providers\ViewServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -24,7 +23,6 @@ class PlatformServiceProvider extends BaseServiceProvider
         app()->register(AuthServiceProvider::class);
         app()->register(BroadcastServiceProvider::class);
         app()->register(EventServiceProvider::class);
-        app()->register(MenuServiceProvider::class);
         app()->register(RouteServiceProvider::class);
         app()->register(TranslationServiceProvider::class);
         app()->register(ViewServiceProvider::class);
