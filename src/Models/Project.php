@@ -80,7 +80,7 @@ class Project extends Model
      */
     public function client(): BelongsTo
     {
-        return $this->belongsTo(Client::class)->withTrashed();
+        return $this->belongsTo(Client::class);
     }
 
     /**
