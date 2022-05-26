@@ -13,7 +13,7 @@ class DepartmentServiceImpl implements DepartmentService
     {
     }
 
-    public function create(string $name, string $description, array $members = []): Department
+    public function create(string $name, ?string $description = null, array $members = []): Department
     {
         return $this->departmentRepository->create($name, $description, $members);
     }

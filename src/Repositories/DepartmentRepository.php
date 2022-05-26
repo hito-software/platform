@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface DepartmentRepository
 {
-    public function create(string $name, string $description, array $members = []): Department;
+    public function create(string $name, ?string $description = null, array $members = []): Department;
 
     public function getAll(): Collection;
 
