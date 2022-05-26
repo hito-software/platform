@@ -4,12 +4,7 @@ namespace Hito\Platform\Http\Controllers;
 
 use Hito\Platform\Models\Announcement;
 use Hito\Platform\Services\AnnouncementService;
-use Carbon\Carbon;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class AnnouncementController extends Controller
 {
@@ -24,16 +19,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $canCreate = auth()->user()->can('create', Announcement::class);
-        $canEdit = auth()->user()->can('edit', Announcement::class);
-        $filter = null;
-
-        if (!($canCreate || $canEdit)) {
-            $filter = 'published';
-        }
-
         $pinned = $this->announcementService->getAll('pinned');
-        $announcements = $this->announcementService->getPaginated($filter, $pinned->pluck('id')->toArray());
+        $announcements = $this->announcementService->getPaginated('published', $pinned->pluck('id')->toArray());
 
         return view('hito::announcements-index', compact('pinned', 'announcements'));
     }
