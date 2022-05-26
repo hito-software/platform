@@ -89,9 +89,9 @@
 
             <div class="flex-1">
                 <div class="flex flex-col min-h-full max-w-[800px] min-w-[200px] w-full mx-auto space-y-2 py-4 flex-1">
-                    <main class="flex-1">
+                    <main class="flex-1 mx-4">
                         @if(View::hasSection('title') || View::hasSection('subtitle') || View::hasSection('actions'))
-                            <div class="flex items-center justify-between space-x-2 w-full">
+                            <div class="flex flex-col items-start sm:flex-row sm:items-center justify-between gap-2 w-full">
                                 <div>
                                     @hasSection('title')
                                         <h1 class="text-4xl">@yield('title')</h1>
@@ -100,7 +100,7 @@
                                         <p>@yield('subtitle')</p>
                                     @endif
                                 </div>
-                                <div class="flex justify-end space-x-1">
+                                <div class="flex sm:justify-end gap-1 flex-wrap">
                                     @yield('actions')
                                 </div>
                             </div>
