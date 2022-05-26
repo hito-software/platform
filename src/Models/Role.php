@@ -52,6 +52,10 @@ class Role extends Model
         'required'
     ];
 
+    protected $casts = [
+        'boolean' => 'required'
+    ];
+
     /**
      * @return HasMany
      */
