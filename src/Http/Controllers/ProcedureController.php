@@ -4,12 +4,7 @@ namespace Hito\Platform\Http\Controllers;
 
 use Hito\Platform\Models\Procedure;
 use Hito\Platform\Services\ProcedureService;
-use Carbon\Carbon;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class ProcedureController extends Controller
 {
@@ -22,18 +17,9 @@ class ProcedureController extends Controller
     /**
      * @return View
      */
-    public function index(Procedure $procedure)
+    public function index()
     {
-        $canEdit = auth()->user()->can('update', $procedure);
-        $canCreate = auth()->user()->can('create', $procedure);
-
-        $status = 'PUBLISHED';
-
-        if ($canEdit || $canCreate) {
-            $status = null;
-        }
-
-        $procedures = $this->procedureService->getPaginated($status);
+        $procedures = $this->procedureService->getPaginated('PUBLISHED');
 
         return view('hito::procedures-index', compact('procedures'));
     }
