@@ -7,14 +7,14 @@
             </div>
             <div class="hidden sm:block">
                 <a href="{{ route('dashboard') }}" title="{{ config('app.name') }}">
-                    <img src="https://hito-software.github.io/images/logo.png" alt=""
+                    <img src="{{ url('images/logo.svg') }}" alt=""
                          class="object-fit-contain" style="min-width: 80px; height: 50px;"/>
                 </a>
             </div>
         </div>
         <div class="sm:hidden">
             <a href="{{ route('dashboard') }}" title="{{ config('app.name') }}">
-                <img src="https://hito-software.github.io/image/logo.png" alt="" class="object-fit-contain"
+                <img src="{{ url('images/logo.svg') }}" alt="" class="object-fit-contain"
                      style="min-width: 80px; height: 50px;"/>
             </a>
         </div>
@@ -69,7 +69,7 @@
         <div class="min-w-[125px] max-w-[250px] w-full h-full">
             <a href="{{ route('dashboard') }}" title="{{ config('app.name') }}"
                class="block h-full flex justify-center items-center py-2">
-                <img src="https://hito-software.github.io/images/logo.png" alt=""
+                <img src="{{ url('images/logo.svg') }}" alt=""
                      class="h-full object-fit-contain"/>
             </a>
         </div>
