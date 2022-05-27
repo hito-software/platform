@@ -8,11 +8,11 @@
 
         <div class="space-y-4">
             @if (session('failed'))
-                <x-hito::alert type="danger">{!! session('failed') !!}</x-alert>
+                <x-hito::alert type="danger">{!! session('failed') !!}</x-hito::alert>
             @endif
 
             @if (session('success'))
-                <x-hito::alert type="success">{!! session('success') !!}</x-alert>
+                <x-hito::alert type="success">{!! session('success') !!}</x-hito::alert>
             @endif
 
             <div class="space-y-4">
