@@ -17,12 +17,9 @@
     <script src="{{ asset('hito/platform/js/vendor.js') }}" defer></script>
     <script src="{{ asset('hito/platform/js/bootstrap.js') }}" defer></script>
     <script src="{{ asset('hito/platform/js/bootstrap-app.js') }}" defer></script>
-@endprepend
-
-@push('js')
     <script src="{{ asset('hito/platform/js/bootstrap-react.js') }}" defer></script>
     <script src="{{ asset('hito/platform/js/app.js') }}" defer></script>
-@endpush
+@endprepend
 
 @section('content')
     @if (auth()->user()->timezone)
@@ -88,8 +85,8 @@
             </div>
 
             <div class="flex-1">
-                <div class="flex flex-col min-h-full max-w-[800px] min-w-[200px] w-full mx-auto space-y-2 py-4 flex-1">
-                    <main class="flex-1 mx-4">
+                <div class="flex flex-col min-h-full max-w-[800px] min-w-[200px] w-full mx-auto gap-2 py-4 flex-1">
+                    <main class="flex-1 mx-4 space-y-4">
                         @if(View::hasSection('title') || View::hasSection('subtitle') || View::hasSection('actions'))
                             <div class="flex flex-col items-start sm:flex-row sm:items-center justify-between gap-2 w-full">
                                 <div>
