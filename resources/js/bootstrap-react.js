@@ -2,7 +2,9 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {connect, Provider, useSelector} from "react-redux";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import classNames from "classnames";
 
+window.classNames = classNames;
 window.React = React;
 window.ReactDOM = ReactDOM;
 window.Redux = {
