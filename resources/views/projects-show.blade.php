@@ -38,19 +38,19 @@
 <div class="show-layout__wrapper">
     <div class="show-layout__wrapper_info">
         @if (null !== $project->address)
-            <span class="truncate block md:max-w-[90%] space-x-1"> 
-                <i class="fas fa-map-marker-alt"></i> 
+            <span class="truncate block md:max-w-[90%] space-x-1">
+                <i class="fas fa-map-marker-alt"></i>
                 <span>{{ $project->address}}</span>
             </span>
         @endif
     </div>
     <div class="uppercase text-sm text-gray-300 hidden md:block">
         @if(!empty($project->country) || !empty($project->client->country))
-        <span class="space-x-1"> 
-            <i class="fas fa-globe"></i> 
+        <span class="space-x-1">
+            <i class="fas fa-globe"></i>
             <span>{{ $project->country?->name ?: $project->client->country?->name }}</span>
         </span>
-        
+
         @else
           -
         @endif
@@ -59,11 +59,11 @@
     <div class="show-layout__left_mobile">
         <div class="uppercase text-sm text-gray-300 md:hidden">
             @if(!empty($project->country) || !empty($project->client->country))
-            <span class="space-x-1"> 
-                <i class="fas fa-globe"></i> 
+            <span class="space-x-1">
+                <i class="fas fa-globe"></i>
                 <span>{{ $project->country?->name ?: $project->client->country?->name }}</span>
             </span>
-            
+
             @else
               -
             @endif
@@ -99,6 +99,7 @@
     </div>
 </div>
 
+@if(!empty($client))
 <div class="show-layout__right">
     @can('viewAny', \App\Models\Client::class)
     <x-hito::card.item-list>
@@ -108,13 +109,14 @@
     </x-hito::card.item-list>
     @endcan
 </div>
+@endif
 @endsection
 
 @section('content')
 <div>
     <label for="form_description" class="block">Description</label>
     @if(is_null($project->description ))
-         <x-alert type="warn">Description was not provided</x-alert>  
+         <x-hito::alert type="warn">Description was not provided</x-hito::alert>
     @else
          <textarea name="description" id="form_description" cols="30" rows="2" class="border py-2 px-4 rounded w-full" disabled>{{ $project->description }}</textarea>
     @endif
