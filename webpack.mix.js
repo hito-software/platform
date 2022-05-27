@@ -19,7 +19,12 @@ mix.js('resources/js/bootstrap.js', 'public/js')
     .sass('resources/scss/app.scss', 'public/css/style.css')
     .sourceMaps()
     .react()
-    .extract(['react'])
+    .extract()
+    .webpackConfig({
+        optimization: {
+            runtimeChunk: true
+        }
+    })
     .options({
         processCssUrls: false,
         postCss: [require('tailwindcss')],
