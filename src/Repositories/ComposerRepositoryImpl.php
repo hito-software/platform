@@ -7,6 +7,7 @@ use Composer\Factory;
 use Composer\InstalledVersions;
 use Composer\IO\NullIO;
 use Composer\Package\PackageInterface;
+use Composer\Repository\PathRepository;
 use Composer\Repository\RepositoryInterface;
 use Composer\Repository\RepositoryManager;
 use Composer\Semver\Comparator;
@@ -54,15 +55,22 @@ class ComposerRepositoryImpl implements ComposerRepository
 
         foreach ($composerRepository->getRepositories() as $repository) {
             $data = [
-                'repository' => $repository,
-                'packages' => $repository->search('*', 0, 'hito-module')
+                'repository' => $repository
             ];
+
+            $isLocalRepository = $repository instanceof PathRepository;
+
+            if ($isLocalRepository) {
+                $data['packages'] = $repository->search('', 0, 'hito-module');
+            } else {
+                $data['packages'] = $repository->search('*', 0, 'hito-module');
+            }
 
             if (empty($data['packages'])) {
                 continue;
             }
 
-            $packages = array_map(function ($package) use ($repository) {
+            $packages = array_map(function ($package) use ($repository, $isLocalRepository) {
                 $isInstalled = $this->isPackageInstalled($package['name'], $repository);
                 $installedVersion = $this->getInstalledPackageVersion($package['name']);
                 $versions = collect($repository->findPackages($package['name'], '*'));
@@ -93,6 +101,7 @@ class ComposerRepositoryImpl implements ComposerRepository
 
                 return [
                     ...$package,
+                    'is_local_package' => $isLocalRepository,
                     'installed' => $isInstalled,
                     'installed_version' => $installedVersion,
                     'update_version' => $updateVersion,
@@ -148,7 +157,7 @@ class ComposerRepositoryImpl implements ComposerRepository
     public function getInstalledPackageByNameAndRepository(string $packageName, ?RepositoryInterface $repository = null): ?PackageInterface
     {
         try {
-            InstalledVersions::isInstalled($packageName);
+            $isInstalled = InstalledVersions::isInstalled($packageName);
         } catch (\OutOfBoundsException) {
             return null;
         }
@@ -167,7 +176,16 @@ class ComposerRepositoryImpl implements ComposerRepository
                 $versions = array_merge($versions, $repository->findPackages($packageName, $version));
             }
         } else {
+            $isLocalRepository = $repository instanceof PathRepository;
+            if ($isLocalRepository) {
+                $version = '*';
+            }
+
             $versions = $repository->findPackages($packageName, $version);
+
+            if ($isLocalRepository) {
+                return array_shift($versions);
+            }
         }
 
         $versions = array_filter($versions, fn($version) => $version->getDistReference() === $hash);
